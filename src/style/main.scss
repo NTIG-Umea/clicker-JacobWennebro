@@ -1,0 +1,17 @@
+@import './variables.scss';
+@import './components/burger.scss';
+@import './components/layout.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Extended+Text&family=Lilita+One&family=VT323&display=swap');
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    box-sizing: inherit;
+    margin: 0;
+    user-select: none;
+}
