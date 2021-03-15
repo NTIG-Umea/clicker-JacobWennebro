@@ -2,7 +2,7 @@
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: 25rem auto;
+    grid-template-columns: 25rem auto 25rem;
 
     .sidebar {
         background-color: $red;
@@ -84,6 +84,7 @@
     .content {
         background-color: $yellow;
         position: relative;
+        overflow: hidden;
 
         .burger {
             position: absolute;
@@ -109,11 +110,13 @@
             left: 0;
             background-color: rgba(0,0,0,0.2);
             font-family: 'Lilita One', cursive;
+            z-index: 100;
 
             &__progress {
                 width: 0%;
                 height: 100%;
                 background-color: green;
+                transition: width 0.2s linear;
                 span {
                     position: absolute;
                     top: 50%;
@@ -124,5 +127,9 @@
                 }
             }
         }
+    }
+
+    .upgrades {
+        background-color: $red;
     }
 }

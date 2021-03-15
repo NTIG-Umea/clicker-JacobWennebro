@@ -9,6 +9,21 @@ export default class Burger extends Component<{onClick: (e: MouseEvent<HTMLDivEl
                 <div className="burger__cheese burger-item"></div>
 
                 <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
+                <div className="burger__patty burger-item"></div>
 
                 <div className="burger__bun bottom burger-item"></div>
             </div>

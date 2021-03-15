@@ -15,3 +15,16 @@ body {
     margin: 0;
     user-select: none;
 }
+
+.temp-click-text {
+    pointer-events: none;
+    font-size: 1.2rem;
+    font-family: 'Lilita One', cursive;
+    color: white;
+    animation: test 2s forwards linear;
+}
+
+@keyframes test {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
