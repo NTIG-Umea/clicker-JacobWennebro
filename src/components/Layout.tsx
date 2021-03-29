@@ -3,6 +3,7 @@ import Burger from './Burger'
 import ReceiptPrice from './ReceiptPrice'
 import Storage from '../scripts/Storage'
 import LevelBar from './LevelBar';
+import Upgrade from './Upgrade';
 
 interface state {
     clicks: number
@@ -84,7 +85,9 @@ export default class Layout extends Component<{}, state> {
         return (
             <div className="layout">
                 <div className="sidebar">
-                    <h1 id="title">Burger Clicker™</h1>
+                    <div>
+                        <h1 id="title" className="nobold">Burger Clicker™</h1>
+                    </div>
                     <div className="receipt">
                         <h1>Cheese Burger</h1>
                         <h3>Clicked {this.state.clicks} times</h3>
@@ -106,7 +109,12 @@ export default class Layout extends Component<{}, state> {
 
                 </div>
                 <div className="upgrades">
-
+                    <h1 className="nobold">Upgrades menu</h1>
+                    <div className="upgrades__container">
+                        <Upgrade title="Patty" short="Doubles the experience points given for every click." price={5}/>
+                        <Upgrade title="Cheese" short="Get one additional click per second for every slice of this melty goodness." price={5}/>
+                        <Upgrade title="Lettuce" short="It may be gross, but this increases the chance of fry rain!" price={3}/>
+                    </div>
                 </div>
             </div>
         )
