@@ -1,0 +1,14 @@
+{
+    "patty": {
+        "name":"Patty",
+        "price": 5
+    },
+    "cheese": {
+        "name":"Cheese",
+        "price": 2
+    },
+    "lettuce": {
+        "name":"Lettuce",
+        "price": 3
+    }
+}

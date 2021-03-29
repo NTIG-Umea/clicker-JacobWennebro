@@ -4,7 +4,8 @@ class Storage {
         booster: 0,
         xp: 0,
         level: 1,
-        money: 0
+        money: 0,
+        upgrades: []
     }
     
     constructor() {
@@ -18,10 +19,11 @@ class Storage {
             xp: number
             level: number
             money: number
+            upgrades: ["patty", "lettuce", "cheese"]
         };
     }
 
-    set(data: { clicks?: number, booster?: number, xp?: number, level?: number, money?: number }) {
+    set(data: { clicks?: number, booster?: number, xp?: number, level?: number, money?: number, upgrades?: string[] }) {
         localStorage.setItem("bc-save", JSON.stringify({ ...this.get(), ...data }));
     }
 }

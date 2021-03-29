@@ -4,16 +4,18 @@ import ReceiptPrice from './ReceiptPrice'
 import Storage from '../scripts/Storage'
 import LevelBar from './LevelBar';
 import Upgrade from './Upgrade';
+import UpgradesConfig from '../upgrades.json'
 
 interface state {
     clicks: number
+    cps: number
     xp: number
     level: number
     money: number
+    upgrades: ["patty", "lettuce", "cheese"]
 }
 
-export default class Layout extends Component<{}, state> {
-
+export default class Layout extends Component<{}, state> {    
     constructor(props: {}) {
         super(props);
 
@@ -23,10 +25,16 @@ export default class Layout extends Component<{}, state> {
 
         this.state = {
             clicks: s.clicks,
+            cps: 0,
             xp: s.xp,
             level: s.level,
-            money: s.money
+            money: s.money,
+            upgrades: s.upgrades
         }
+
+        setInterval(() => {
+            this.setState({ cps: 0 })
+        }, 1000);
 
     }
 
@@ -45,6 +53,14 @@ export default class Layout extends Component<{}, state> {
         }, 4000);
     }
 
+    upgradesToPrice(upgrades: string[]) {
+        let price = 0;
+        price += upgrades.filter(u => u === "patty").length * UpgradesConfig.patty.price;
+        price += upgrades.filter(u => u === "cheese").length * UpgradesConfig.cheese.price;
+        price += upgrades.filter(u => u === "lettuce").length * UpgradesConfig.lettuce.price;
+        return price;
+    }
+
     BurgerClick(e: MouseEvent<HTMLDivElement>) {
         const b = e.currentTarget;
 
@@ -57,6 +73,7 @@ export default class Layout extends Component<{}, state> {
                 level: this.state.level + 1,
                 xp: 0,
                 clicks: this.state.clicks + 1,
+                cps: this.state.cps+1
             });
 
         } else {
@@ -64,7 +81,8 @@ export default class Layout extends Component<{}, state> {
 
             this.setState({
                 clicks: this.state.clicks + 1,
-                xp: this.state.xp + xpIncrease
+                xp: this.state.xp + xpIncrease,
+                cps: this.state.cps+1
             });
 
             this.SpawnClickText(`+${xpIncrease} XP`, e.clientX, e.clientY);
@@ -90,10 +108,24 @@ export default class Layout extends Component<{}, state> {
                     </div>
                     <div className="receipt">
                         <h1>Cheese Burger</h1>
-                        <h3>Clicked {this.state.clicks} times</h3>
+                        <h3>{this.state.cps} clicks p/s</h3>
 
                         <div className="receipt__prices">
-                            <ReceiptPrice item="Patty" price={2} amount={1}/>
+
+                            <ReceiptPrice item="Patty" price={5} amount={1}/>                        
+                            <ReceiptPrice item="Cheese" price={2} amount={1}/> 
+
+                            <ul className="receipt__spacer">
+                                <li><p>Extras</p></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <ReceiptPrice item="Patty" price={UpgradesConfig.patty.price} amount={this.state.upgrades.filter(u => u === "patty").length}/>                        
+                            <ReceiptPrice item="Cheese" price={UpgradesConfig.cheese.price} amount={this.state.upgrades.filter(u => u === "cheese").length}/>                        
+                            <ReceiptPrice item="Lettuce" price={UpgradesConfig.lettuce.price} amount={this.state.upgrades.filter(u => u === "lettuce").length}/>                        
+                        
+                            <h3 id="totalPrice">Total ${this.upgradesToPrice(this.state.upgrades) + 7}</h3>
+                            
                         </div>
 
                         <span id="barcode">BURGER CLICKER</span>
@@ -104,16 +136,16 @@ export default class Layout extends Component<{}, state> {
                 </div>
                 <div className="content">
 
-                    <Burger onClick={this.BurgerClick}/>
+                    <Burger upgrades={this.state.upgrades} onClick={this.BurgerClick}/>
                     <LevelBar level={this.state.level} xp={this.state.xp}/>
 
                 </div>
                 <div className="upgrades">
                     <h1 className="nobold">Upgrades menu</h1>
                     <div className="upgrades__container">
-                        <Upgrade title="Patty" short="Doubles the experience points given for every click." price={5}/>
-                        <Upgrade title="Cheese" short="Get one additional click per second for every slice of this melty goodness." price={5}/>
-                        <Upgrade title="Lettuce" short="It may be gross, but this increases the chance of fry rain!" price={3}/>
+                        <Upgrade title="Patty" upgradeId="patty" short="Doubles the experience points given for every click." price={5} updateState={(e) => this.setState(e)} upgrades={this.state.upgrades} money={this.state.money}/>
+                        <Upgrade title="Cheese" upgradeId="cheese" short="Get one additional click per second for every slice of this melty goodness." price={2} updateState={(e) => this.setState(e)} upgrades={this.state.upgrades} money={this.state.money}/>
+                        <Upgrade title="Lettuce" upgradeId="lettuce" short="It may be gross, but this increases the chance of fry rain!" price={3} updateState={(e) => this.setState(e)} upgrades={this.state.upgrades} money={this.state.money}/>
                     </div>
                 </div>
             </div>

@@ -1,12 +1,12 @@
 import React, { Component, MouseEvent } from 'react'
 
-export default class Burger extends Component<{onClick: (e: MouseEvent<HTMLDivElement>) => void}> {
+export default class Burger extends Component<{onClick: (e: MouseEvent<HTMLDivElement>) => void, upgrades: ["patty", "lettuce", "cheese"]}> {
     render() {
         return (
             <div onClick={this.props.onClick} className="burger">
                 <div className="burger__bun top burger-item"></div>
 
-                {["lettuce","patty","cheese","patty","cheese","patty","cheese","patty","cheese","patty","cheese","patty","cheese","patty",].reverse().map(i => (
+                {this.props.upgrades.reverse().map(i => (
                     <div className={`burger__${i} burger-item`}></div>
                 ))}
 
