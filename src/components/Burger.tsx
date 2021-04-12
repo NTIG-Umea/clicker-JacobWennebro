@@ -9,7 +9,8 @@ export default class Burger extends Component<props> {
             <div onClick={this.props.onClick} className="burger">
                 <div className="burger__bun top burger-item"></div>
 
-                {this.props.upgrades.slice(this.props.upgrades.length-20, this.props.upgrades.length).reverse().map((i => 
+                {console.log(this.props.upgrades.reverse().slice(this.props.upgrades.length-20, this.props.upgrades.length))}
+                {this.props.upgrades.reverse().slice(this.props.upgrades.length-20, this.props.upgrades.length).reverse().map((i => 
                     <div className={`burger__${i} burger-item`}></div>
                 ))}
 

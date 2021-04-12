@@ -112,7 +112,7 @@ export default class Layout extends Component<{}, state> {
                 cps: this.state.cps+1
             });
 
-            this.SpawnClickText(`+${Math.round(xpIncrease)} XP`, 200, 200);
+            //this.SpawnClickText(`+${Math.round(xpIncrease)} XP`, 200, 200);
 
             Storage.set({ clicks: this.state.clicks, xp: this.state.xp });
         }
