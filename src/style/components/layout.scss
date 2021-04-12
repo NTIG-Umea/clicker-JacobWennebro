@@ -107,10 +107,6 @@
             transition: transform 0.1s linear;
             cursor: pointer;
 
-            &:hover {
-                transform: scale(1.05) translateY(-50%) !important;
-            }
-
         }
 
         .level-bar {
