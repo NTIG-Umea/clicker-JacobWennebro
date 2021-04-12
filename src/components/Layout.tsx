@@ -33,7 +33,16 @@ export default class Layout extends Component<{}, state> {
         }
 
         setInterval(() => {
-            this.setState({ cps: 0 })
+            this.setState({ cps: 0 });
+
+            const additionalClicks = this.state.upgrades.filter(u => u === "cheese").length
+            let i=0;
+
+            while(i < additionalClicks) {
+                this.BurgerClick();
+                i++;
+            }
+
         }, 1000);
 
     }
@@ -53,6 +62,26 @@ export default class Layout extends Component<{}, state> {
         }, 4000);
     }
 
+    getBurgerHeight(upgrades: string[]) {
+        let height = 7.1;
+
+        for(const u of upgrades) {
+            switch(u) {
+                case "patty":
+                    height += 1;
+                break;
+                case "cheese":
+                    height += 0.1;
+                break;
+                case "lettuce":
+                    height += 0.1;
+                break;
+            }
+        }
+
+        return height;
+    }
+    
     upgradesToPrice(upgrades: string[]) {
         let price = 0;
         price += upgrades.filter(u => u === "patty").length * UpgradesConfig.patty.price;
@@ -61,9 +90,7 @@ export default class Layout extends Component<{}, state> {
         return price;
     }
 
-    BurgerClick(e: MouseEvent<HTMLDivElement>) {
-        const b = e.currentTarget;
-
+    BurgerClick() {
         const lvl = Math.round(this.state.xp)/(100*this.state.level);
 
         if(lvl >= this.state.level) {
@@ -77,7 +104,7 @@ export default class Layout extends Component<{}, state> {
             });
 
         } else {
-            const xpIncrease = Number((Math.random()*1).toFixed(2).substr(0, 4));
+            const xpIncrease = Number((Math.random()*1).toFixed(2).substr(0, 4)) * ((2 * this.state.upgrades.filter(u => u === "patty").length) || 1);
 
             this.setState({
                 clicks: this.state.clicks + 1,
@@ -85,17 +112,14 @@ export default class Layout extends Component<{}, state> {
                 cps: this.state.cps+1
             });
 
-            this.SpawnClickText(`+${xpIncrease} XP`, e.clientX, e.clientY);
+            this.SpawnClickText(`+${Math.round(xpIncrease)} XP`, 200, 200);
 
             Storage.set({ clicks: this.state.clicks, xp: this.state.xp });
         }
 
-        if((((this.state.clicks+1) / 100) % 1) === 0) {
-            Storage.set({ money: this.state.money + 1 });
-
-            this.setState({
-                money: this.state.money + 1
-            });
+        if((((this.state.clicks+1) / 10) % 1) === 0) {
+            this.setState({ money: this.state.money + 1 });
+            Storage.set({ money: this.state.money });
         }
     }
 
@@ -108,7 +132,7 @@ export default class Layout extends Component<{}, state> {
                     </div>
                     <div className="receipt">
                         <h1>Cheese Burger</h1>
-                        <h3>{this.state.cps} clicks p/s</h3>
+                        <h3>{this.state.cps} clicks p/s | Height {Math.round(this.getBurgerHeight(this.state.upgrades))} cm</h3>
 
                         <div className="receipt__prices">
 

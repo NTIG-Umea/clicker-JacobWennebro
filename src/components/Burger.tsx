@@ -1,13 +1,15 @@
-import React, { Component, MouseEvent } from 'react'
+import React, { Component, MouseEvent, RefObject } from 'react'
 
-export default class Burger extends Component<{onClick: (e: MouseEvent<HTMLDivElement>) => void, upgrades: ["patty", "lettuce", "cheese"]}> {
+interface props {onClick: (e: MouseEvent<HTMLDivElement>) => void, upgrades: ["patty", "lettuce", "cheese"]}
+
+export default class Burger extends Component<props> {
     render() {
         return (
             <div onClick={this.props.onClick} className="burger">
                 <div className="burger__bun top burger-item"></div>
 
                 {this.props.upgrades.reverse().map(i => (
-                    <div className={`burger__${i} burger-item`}></div>
+                    <div key={`${i}-${Math.random()}`} className={`burger__${i} burger-item`}></div>
                 ))}
 
                 {/* Defaults */}
