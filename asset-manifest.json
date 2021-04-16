@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/clicker-JacobWennebro/static/css/main.8cbba750.chunk.css",
-    "main.js": "/clicker-JacobWennebro/static/js/main.80db7d2c.chunk.js",
-    "main.js.map": "/clicker-JacobWennebro/static/js/main.80db7d2c.chunk.js.map",
+    "main.js": "/clicker-JacobWennebro/static/js/main.659718d0.chunk.js",
+    "main.js.map": "/clicker-JacobWennebro/static/js/main.659718d0.chunk.js.map",
     "runtime-main.js": "/clicker-JacobWennebro/static/js/runtime-main.e192fd2d.js",
     "runtime-main.js.map": "/clicker-JacobWennebro/static/js/runtime-main.e192fd2d.js.map",
     "static/js/2.ff451abc.chunk.js": "/clicker-JacobWennebro/static/js/2.ff451abc.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.e192fd2d.js",
     "static/js/2.ff451abc.chunk.js",
     "static/css/main.8cbba750.chunk.css",
-    "static/js/main.80db7d2c.chunk.js"
+    "static/js/main.659718d0.chunk.js"
   ]
 }
