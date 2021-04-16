@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/clicker-JacobWennebro/static/css/main.8cbba750.chunk.css",
-    "main.js": "/clicker-JacobWennebro/static/js/main.53a253f0.chunk.js",
-    "main.js.map": "/clicker-JacobWennebro/static/js/main.53a253f0.chunk.js.map",
+    "main.css": "/clicker-JacobWennebro/static/css/main.e86c1b51.chunk.css",
+    "main.js": "/clicker-JacobWennebro/static/js/main.7290cb59.chunk.js",
+    "main.js.map": "/clicker-JacobWennebro/static/js/main.7290cb59.chunk.js.map",
     "runtime-main.js": "/clicker-JacobWennebro/static/js/runtime-main.045b63bc.js",
     "runtime-main.js.map": "/clicker-JacobWennebro/static/js/runtime-main.045b63bc.js.map",
     "static/js/2.c2ab31a4.chunk.js": "/clicker-JacobWennebro/static/js/2.c2ab31a4.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.450611e0.chunk.js": "/clicker-JacobWennebro/static/js/3.450611e0.chunk.js",
     "static/js/3.450611e0.chunk.js.map": "/clicker-JacobWennebro/static/js/3.450611e0.chunk.js.map",
     "index.html": "/clicker-JacobWennebro/index.html",
-    "static/css/main.8cbba750.chunk.css.map": "/clicker-JacobWennebro/static/css/main.8cbba750.chunk.css.map",
+    "static/css/main.e86c1b51.chunk.css.map": "/clicker-JacobWennebro/static/css/main.e86c1b51.chunk.css.map",
     "static/js/2.c2ab31a4.chunk.js.LICENSE.txt": "/clicker-JacobWennebro/static/js/2.c2ab31a4.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.045b63bc.js",
     "static/js/2.c2ab31a4.chunk.js",
-    "static/css/main.8cbba750.chunk.css",
-    "static/js/main.53a253f0.chunk.js"
+    "static/css/main.e86c1b51.chunk.css",
+    "static/js/main.7290cb59.chunk.js"
   ]
 }
