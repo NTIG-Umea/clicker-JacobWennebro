@@ -5,7 +5,15 @@ interface props {onClick: (e: MouseEvent<HTMLDivElement>) => void, upgrades: { p
 export default class Burger extends Component<props> {
     private Burger = createRef() as RefObject<HTMLDivElement>
     private sound = new Audio("/clicker-JacobWennebro/click.mp3");
-    private upgradesList = this.props.upgradesDisplay.reverse();
+
+    reverse(arr: string[]) {
+        for(var i = 0, j = arr.length-1; i < j; i++, j--) {
+            var tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+        }
+        return arr;
+    };
 
     render() {
 
@@ -19,7 +27,7 @@ export default class Burger extends Component<props> {
             <div ref={this.Burger} onClick={this.props.onClick} onMouseDown={mouseDown} onMouseUp={() => this.Burger.current ? this.Burger.current.style.transform = "" : ""} className="burger">
                 <div className="burger__bun top burger-item"></div>
 
-                {this.upgradesList.map((i => 
+                {this.reverse(this.props.upgradesDisplay).map((i => 
                     <div className={`burger__${i} burger-item`}></div>
                 ))}
                 
