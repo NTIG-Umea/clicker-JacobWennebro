@@ -12,7 +12,12 @@ interface state {
     xp: number
     level: number
     money: number
-    upgrades: ["patty", "lettuce", "cheese"]
+    upgradeDisplay: string[],
+    upgrades: {
+        patty: number
+        cheese: number
+        lettuce: number
+    }
 }
 
 export default class Layout extends Component<{}, state> {    
@@ -29,13 +34,14 @@ export default class Layout extends Component<{}, state> {
             xp: s.xp,
             level: s.level,
             money: s.money,
-            upgrades: s.upgrades
+            upgrades: s.upgrades,
+            upgradeDisplay: s.upgradeDisplay
         }
 
         setInterval(() => {
             this.setState({ cps: 0 });
 
-            const additionalClicks = this.state.upgrades.filter(u => u === "cheese").length
+            const additionalClicks = this.state.upgrades.cheese;
             let i=0;
 
             while(i < additionalClicks) {
@@ -62,31 +68,15 @@ export default class Layout extends Component<{}, state> {
         }, 4000);
     }
 
-    getBurgerHeight(upgrades: string[]) {
-        let height = 7.1;
-
-        for(const u of upgrades) {
-            switch(u) {
-                case "patty":
-                    height += 1;
-                break;
-                case "cheese":
-                    height += 0.1;
-                break;
-                case "lettuce":
-                    height += 0.1;
-                break;
-            }
-        }
-
-        return height;
+    getBurgerHeight(u: { patty: number, cheese: number, lettuce: number }) {
+        return u ? (u.patty || 0) + ((u.cheese || 0)*0.1) + ((u.lettuce || 0)*0.1) : 0;
     }
     
-    upgradesToPrice(upgrades: string[]) {
+    upgradesToPrice(upgrades: { patty: number, cheese: number, lettuce: number }) {
         let price = 0;
-        price += upgrades.filter(u => u === "patty").length * UpgradesConfig.patty.price;
-        price += upgrades.filter(u => u === "cheese").length * UpgradesConfig.cheese.price;
-        price += upgrades.filter(u => u === "lettuce").length * UpgradesConfig.lettuce.price;
+        price += (upgrades.patty  || 0) * UpgradesConfig.patty.price;
+        price += (upgrades.cheese || 0) * UpgradesConfig.cheese.price;
+        price += (upgrades.lettuce || 0) * UpgradesConfig.lettuce.price;
         return price;
     }
 
@@ -104,7 +94,7 @@ export default class Layout extends Component<{}, state> {
             });
 
         } else {
-            const xpIncrease = Number((Math.random()*1).toFixed(2).substr(0, 4)) * ((2 * this.state.upgrades.filter(u => u === "patty").length) || 1);
+            const xpIncrease = Number((Math.random()*1).toFixed(2).substr(0, 4)) * ((2 * this.state.upgrades.patty) || 1);
 
             this.setState({
                 clicks: this.state.clicks + 1,
@@ -144,9 +134,9 @@ export default class Layout extends Component<{}, state> {
                                 <li></li>
                                 <li></li>
                             </ul>
-                            <ReceiptPrice item="Patty" price={UpgradesConfig.patty.price} amount={this.state.upgrades.filter(u => u === "patty").length}/>                        
-                            <ReceiptPrice item="Cheese" price={UpgradesConfig.cheese.price} amount={this.state.upgrades.filter(u => u === "cheese").length}/>                        
-                            <ReceiptPrice item="Lettuce" price={UpgradesConfig.lettuce.price} amount={this.state.upgrades.filter(u => u === "lettuce").length}/>                        
+                            <ReceiptPrice item="Patty" price={UpgradesConfig.patty.price} amount={this.state.upgrades.patty || 0}/>                        
+                            <ReceiptPrice item="Cheese" price={UpgradesConfig.cheese.price} amount={this.state.upgrades.cheese || 0}/>                        
+                            <ReceiptPrice item="Lettuce" price={UpgradesConfig.lettuce.price || 0} amount={this.state.upgrades.lettuce || 0}/>                        
                         
                             <h3 id="totalPrice">Total ${this.upgradesToPrice(this.state.upgrades) + 7}</h3>
                             
@@ -160,16 +150,16 @@ export default class Layout extends Component<{}, state> {
                 </div>
                 <div className="content">
 
-                    <Burger upgrades={this.state.upgrades} onClick={this.BurgerClick}/>
+                    <Burger upgrades={this.state.upgrades} onClick={this.BurgerClick} upgradesDisplay={this.state.upgradeDisplay}/>
                     <LevelBar level={this.state.level} xp={this.state.xp}/>
 
                 </div>
                 <div className="upgrades">
                     <h1 className="nobold">Upgrades menu</h1>
                     <div className="upgrades__container">
-                        <Upgrade title="Patty" upgradeId="patty" short="Doubles the experience points given for every click." price={5} updateState={(e) => this.setState(e)} upgrades={this.state.upgrades} money={this.state.money}/>
-                        <Upgrade title="Cheese" upgradeId="cheese" short="Get one additional click per second for every slice of this melty goodness." price={2} updateState={(e) => this.setState(e)} upgrades={this.state.upgrades} money={this.state.money}/>
-                        <Upgrade title="Lettuce" upgradeId="lettuce" short="It may be gross, but this increases the chance of fry rain!" price={3} updateState={(e) => this.setState(e)} upgrades={this.state.upgrades} money={this.state.money}/>
+                        <Upgrade title="Patty" upgradeId="patty" short="Doubles the experience points given for every click." price={5} updateState={(e) => this.setState(e)} upgrades={this.state.upgrades} money={this.state.money} upgradeDisplay={this.state.upgradeDisplay}/>
+                        <Upgrade title="Cheese" upgradeId="cheese" short="Get one additional click per second for every slice of this melty goodness." price={2} updateState={(e) => this.setState(e)} upgrades={this.state.upgrades} money={this.state.money} upgradeDisplay={this.state.upgradeDisplay}/>
+                        <Upgrade title="Lettuce" upgradeId="lettuce" short="It may be gross, but this increases the chance of fry rain!" price={3} updateState={(e) => this.setState(e)} upgrades={this.state.upgrades} money={this.state.money} upgradeDisplay={this.state.upgradeDisplay}/>
                     </div>
                 </div>
             </div>
