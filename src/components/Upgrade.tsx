@@ -4,7 +4,8 @@ import Storage from '../scripts/Storage'
 interface props {title: string, short: string, price: number, updateState: (e: any) => void, upgradeId: string, upgrades: { patty: number, cheese: number, lettuce: number}, money: number, upgradeDisplay: string[]}
 
 export default class Upgrade extends Component<props> {
-    
+    private sound = new Audio("/clicker-JacobWennebro/cash.mp3");
+
     constructor(props: props) {
         super(props);
 
@@ -17,6 +18,9 @@ export default class Upgrade extends Component<props> {
             alert("You cannot afford " + this.props.title)
             return;
         }
+
+        this.sound.currentTime = 0.1;
+        this.sound.play();
 
         let upgrades = this.props.upgrades;
         // @ts-ignore
